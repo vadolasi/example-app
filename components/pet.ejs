@@ -1,0 +1,17 @@
+<div class="card">
+  <img src="<%= pet.foto %>" width="100px" height="100px">
+  <div class="card-body">
+    <h5 class="card-title"><%= pet.nome %></h5>
+    <h6 class="card-subtitle mb-2 text-muted"><%= pet.especie %></h6>
+    <div class="card-text">
+      <span><%= pet.raca %></span>
+      <br />
+      <span><%= pet.sexo %></span>
+    </div>
+    <% if (usuario) { %>
+      <a href="#" class="btn btn-primary">Quero adotar</a>
+    <% } else { %>
+      <a href="/login" class="btn btn-primary">Quero adotar</a>
+    <% } %>
+  </div>
+</div>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <%- include("../components/head", { titulo: "Entrar" }) %>
+  <body>
+    <%- include("../components/topbar") %>
+    <div class="d-flex flex-column align-items-center justify-content-center w-100 h-100 h-screen">
+      <% if (locals.erro) { %>
+        <div class="alert alert-danger" role="alert"><%= erro %></div>
+      <% } %>
+      <form class="card p-4 form-container my-5" action="/login" method="post">
+        <div class="card-body">
+          <h1 class="card-title fs-3 mb-4">Entrar</h1>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+          </div>
+          <div class="mb-3">
+            <label for="senha" class="form-label">Senha</label>
+            <input type="password" class="form-control" id="senha" name="senha" required>
+          </div>
+          <label for="tipo" class="form-label">Sou</label>
+          <select class="form-select mb-4" name="tipo">
+            <option selected value="usuario">Usuário</option>
+            <option value="ong">Ong</option>
+          </select>
+          <button type="submit" class="btn btn-primary w-100 mb-3">Entrar</button>
+          <p class="text-center">Não tem uma conta? <a href="/cadastro">Cadastre-se</a></p>
+        </div>
+      </form>
+    </div>
+    <% if (locals.erros) { %>
+      <script>
+        const erros = <%- JSON.stringify(erros) %>
+
+        erros.forEach(erro => {
+          const input = document.getElementById(erro.param)
+          if (!input.className.includes("is-invalid")) {
+            input.classList.add("is-invalid")
+            const mensagem = document.createElement("div")
+            mensagem.className = "invalid-feedback"
+            mensagem.innerText = erro.msg
+            input.parentNode.appendChild(mensagem)
+          }
+        })
+      </script>
+    <% } %>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+  </body>
+</html>

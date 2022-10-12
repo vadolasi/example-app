@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<%- include("../components/head", { titulo: "Pets" }) %>
+  <body>
+    <%- include("../components/topbar") %>
+    <div class="container mt-5 d-flex justify-content-center flex-column">
+      <a class="btn btn-primary mb-5" href="/cadastro_pet">Cadastrar PET</a>
+      <h3 id="titulo">Seus pets</h3>
+      <% if (pets.length > 0) { %>
+        <div class="d-flex flex-wrap gap-4">
+          <% pets.forEach(pet => { %>
+            <%- include("../components/pet_ong", { pet }) %>
+          <% }) %>
+        </div>
+      <% } else { %>
+        <span>Nenhum resultado encontrado!</span>
+      <% } %>
+      <nav class="mt-5 mx-auto d-flex justify-content-center" aria-label="Navegação de página exemplo">
+        <ul class="pagination">
+          <li class="page-item"><a class="page-link <%= 0 == pagina - 1 ? "disabled": "" %>" href="/meus_pets?pagina=<%= pagina - 1 %>">Anterior</a></li>
+          <% for (c = 1; c <= numeroDePáginas; c++) { %>
+            <li class="page-item"><a class="page-link <%= c == pagina ? "disabled": "" %>" href="/meus_pets?pagina=<%= c %><%= c == pagina + 1 ? `&cursor=${cursor}` : "" %>"><%= c %></a></li>
+          <% } %>
+          <li class="page-item"><a class="page-link <%= c == pagina + 1 ? "disabled": "" %>" href="/meus_pets?pagina=<%= pagina + 1 %>&cursor=<%= cursor %>">Proximo</a></li>
+        </ul>
+      </nav>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+  </body>
+</html>

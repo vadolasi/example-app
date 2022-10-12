@@ -1,0 +1,42 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url = "file:./dev.db"
+}
+
+model Usuario {
+  id    Int    @id @default(autoincrement())
+  nome  String
+  email String @unique
+  senha String
+}
+
+model ONG {
+  id                Int    @id @default(autoincrement())
+  nome              String
+  email             String @unique
+  cnpj              String
+  telefone          String
+  instagram         String
+  cep               String
+  atuaEmGrandeNatal Boolean
+  trabalhaComCaes   Boolean
+  trabalhaComGatos  Boolean
+  trabalhaComOutros Boolean
+  senha             String
+  pets              Pet[]
+}
+
+model Pet {
+  id         Int     @id @default(autoincrement())
+  nome       String
+  foto       String
+  raca       String
+  sexo       String
+  especie    String
+  ong        ONG     @relation(fields: [ongId], references: [id])
+  ongId      Int
+}

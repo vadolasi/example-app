@@ -1,0 +1,16 @@
+<nav class="navbar bg-light sticky-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Adopet</a>
+    <div class="d-flex gap-2">
+      <% if (usuario && JSON.stringify(usuario) !== "{}") { %>
+        <% if (usuario.tipo == "ong") { %>
+          <a class="btn btn-outline-primary" href="/meus_pets">Meus pets</a>
+        <% } %>
+        <a class="btn btn-primary" href="/logout">Sair</a>
+      <% } else { %>
+        <a class="btn btn-outline-primary" href="/login">Entrar</a>
+        <a class="btn btn-primary" href="/cadastro">Cadastre-se</a>
+      <% } %>
+    </div>
+  </div>
+</nav>
